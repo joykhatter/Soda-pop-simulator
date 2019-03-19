@@ -1,0 +1,155 @@
+/*
+ *Joy Khatter
+ *Student ID -500866988
+ *Assignment 2 pop simulator
+ *CCPS 393 Section wednesday
+ *Instructor: L. Hiraki
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXPRICE 105
+#define MINPRICE 35
+
+int main (int argc, char *argv[])
+{
+int cmd_input=0,c1=0,loop_chq1=1,loop_chq2=1,t=0,y=0,u=0,h=0,h1=0,h2=0,h3=0,h4=0;
+char c2;
+if (argc == 1)
+{
+printf("\nPlease specify selling price as command line argument");
+printf("\n");
+return 0;
+}
+else
+   cmd_input = atoi(argv[1]);
+   if(cmd_input>MAXPRICE || cmd_input<MINPRICE)
+   {
+   printf("\nPrice must be from 30 to 105 centimes inclusive");
+   printf("\n");
+   return 0;
+   }
+   else
+      c1=cmd_input%5;
+      if(c1!=0)
+      {
+      printf("\nPrice must be a multiple of 5");
+      printf("\n");
+      return 0;
+      }
+      else
+         printf("\nWelcome to my C Pop Machine");
+         loop_chq1=1;
+         while(loop_chq1==1)
+         {
+            printf("\nPop is %d centimes. Please insert any combination of nickels [N or n], dimes [D or d] or pentes [p or p] You can press R or r for coin return", cmd_input);
+            loop_chq2=1;
+            y=0;
+            t=cmd_input;
+            while(loop_chq2==1)
+            {
+               printf("\nEnter coin (NDPR): ");
+               scanf(" %c", &c2 );
+                u=0;
+                if(c2=='n' || c2=='N')
+                {
+                printf("\nNickel detected.");
+                y=y+5;
+                t=t-5;
+                u=1;
+                if(y>=cmd_input)
+                {
+                u=4;
+                }
+                }
+                else
+                   if(c2=='D' || c2=='d')
+                   {
+                   printf("\nDime detected.");
+                   y=y+10;
+                   t=t-10;
+                   u=1;
+                   if(y>=cmd_input)
+                   {
+                   u=4;
+                   }
+                   }
+                   else
+                      if(c2=='p' || c2=='P')
+                      {
+                      printf("\nPente detected.");
+                      y=y+20;
+                      t=t-20;
+                      u=1;
+                      if(y>=cmd_input)
+                      {
+                      u=4;
+                      }
+                      }
+                      else
+                         if(c2=='r' || c2=='R')
+                         {
+                         u=2;
+                         }
+                         else
+                         if(c2=='e' || c2=='E')
+                         {
+                         u=3;
+                         }
+               printf("\n");
+               if(u==1)
+               {
+               printf("\nYou have inserted a total of %d centimes.", y);
+               printf("\nPlease insert %d more centimes", t);
+               }
+               else
+                  if(u==2)
+                  {
+                  h=y;
+                  h1=h%10;
+                  h2=h-h1;
+                  h2=h2/10;
+                  h3=h1/5;
+                  printf("\nChange given: %d centimes as %d dime(s) and %d nickel(s).", y, h2, h3);
+                  loop_chq2=2;
+                  }
+                  else
+                     if(u==3)
+                     {
+                     h=y;
+                     h1=h%10;
+                     h2=h-h1;
+                     h2=h2/10;
+                     h3=h1/5;
+                     printf("\nChange given: %d centimes as %d dime(s) and %d nickel(s).", y, h2, h3);
+                     printf("\nShutting down. Goodbye.");
+                     loop_chq2=2;
+                     loop_chq1=2;
+                     }
+                     else
+                        if(u==4)
+                        {
+                        printf("\nYou have inserted a totsl of %d centimes.", y);
+                        printf("\nPop is dispensed. Thank you for your business! Please come again.");
+                        h=y-cmd_input;
+                        h4=h;
+                        h1=h%10;
+                        h2=h-h1;
+                        h2=h2/10;
+                        h3=h1/5;
+                        printf("\nChange given: %d centimes as %d dime(s) and %d nickel(s).", h4, h2, h3);
+                        loop_chq2=2;
+                        }
+                        else
+                           if(u==0)
+                           {
+                           printf("\nUnknown coin rejeted.");
+                           printf("\nYou have inserted a total of %d centimes.", y);
+                           printf("\nPlease insert %d more centimes", t);
+                           }
+            }
+         }
+printf("\n");
+return 0;
+}
+
